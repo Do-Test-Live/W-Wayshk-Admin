@@ -1,3 +1,10 @@
+<?php
+session_start();
+require_once("include/dbController.php");
+$db_handle = new DBController();
+if (isset($_SESSION['userid'])) {
+    header("Location: dashboard.php");
+}?>
 <!DOCTYPE html>
 <html lang="en" class="h-100">
 <head>
@@ -27,14 +34,14 @@
                                     <form action="" method="post">
                                         <div class="form-group">
                                             <label class="mb-1 text-white"><strong>Email</strong></label>
-                                            <input type="email" class="form-control" placeholder="hello@example.com">
+                                            <input type="email" name="email" class="form-control" placeholder="hello@example.com">
                                         </div>
                                         <div class="form-group">
                                             <label class="mb-1 text-white"><strong>Password</strong></label>
-                                            <input type="password" class="form-control" placeholder="Password">
+                                            <input type="password" name="password" class="form-control" placeholder="Password">
                                         </div>
                                         <div class="text-center mt-4 pt-2">
-                                            <button type="submit" class="btn bg-white text-primary btn-block">Sign Me In</button>
+                                            <button type="submit" name="sub_log" class="btn bg-white text-primary btn-block">Sign Me In</button>
                                         </div>
                                     </form>
                                 </div>
@@ -54,6 +61,32 @@
     <script src="vendor/global/global.min.js"></script>
     <script src="js/custom.min.js"></script>
     <script src="js/deznav-init.js"></script>
+    <?php
+    if (isset($_POST['sub_log'])) {
+        $email = $db_handle->checkValue($_POST['email']);
+        $password = $db_handle->checkValue($_POST['password']);
 
+        $login = $db_handle->numRows("SELECT * FROM admin_login WHERE email='$email' and password='$password'");
+
+        $login_data = $db_handle->runQuery("SELECT * FROM admin_login WHERE email='$email' and password='$password'");
+
+        if($login==1){
+            $_SESSION['userid']=$login_data[0]["id"];
+            $_SESSION['name']=$login_data[0]["name"];
+
+            ?>
+            <script>
+                window.location.href = "dashboard.php";
+            </script>
+        <?php
+        }else{
+        ?>
+            <script>
+                alert('email address and password wrong!');
+            </script>
+            <?php
+        }
+    }
+    ?>
 </body>
 </html>
