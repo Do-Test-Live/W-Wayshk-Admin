@@ -1,3 +1,10 @@
+<?php
+session_start();
+require_once("include/dbController.php");
+$db_handle = new DBController();
+if (!isset($_SESSION['userid'])) {
+    header("Location: index.php");
+}?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
