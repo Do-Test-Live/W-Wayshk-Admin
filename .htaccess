@@ -34,6 +34,10 @@ RewriteRule ^Business-Analysis businessAnalysis.php [NC,L]
 
 RewriteRule ^Store-Analysis storeAnalysis.php [NC,L]
 
+RewriteRule ^Pending-Order pendingOrder.php [NC,L]
+
+RewriteRule ^Confirm-Order confirmOrder.php [NC,L]
+
 RewriteRule ^Report report.php [NC,L]
 
 RewriteRule ^Customer customer.php [NC,L]

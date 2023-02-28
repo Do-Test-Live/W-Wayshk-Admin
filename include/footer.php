@@ -3,7 +3,7 @@
        ***********************************-->
 <div class="footer">
     <div class="copyright">
-        <p>Copyright © Your Company Name</p>
+        <p>Copyright © Wayshk Admin</p>
     </div>
 </div>
 <!--**********************************
