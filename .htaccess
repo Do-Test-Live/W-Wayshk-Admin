@@ -2,55 +2,56 @@ ErrorDocument 404 http://localhost/W-Wayshk-Admin/404.php
 
 RewriteEngine on
 
-RewriteRule ^Login index.php [NC,L]
+RewriteRule ^Login index.php [NE,L]
 
-RewriteRule ^Logout logout.php [NC,L]
+RewriteRule ^Logout logout.php [NE,L]
 
-RewriteRule ^Dashboard dashboard.php [NC,L]
+RewriteRule ^Dashboard dashboard.php [NE,L]
 
-RewriteRule ^Add-Category addCategory.php [NC,L]
+RewriteRule ^Product\-Analysis productAnalysis.php [NE,L]
 
-RewriteRule ^Category category.php [NC,L]
+RewriteRule ^Business-Analysis businessAnalysis.php [NE,L]
 
-RewriteRule ^Add-Store addStore.php [NC,L]
+RewriteRule ^Store\-Analysis storeAnalysis.php [NE,L]
 
-RewriteRule ^Store store.php [NC,L]
+RewriteRule ^Add-Category addCategory.php [NE,L]
 
-RewriteRule ^Add-Product addProduct.php [NC,L]
+RewriteRule ^Category category.php [NE,L]
 
-RewriteRule ^Product product.php [NC,L]
+RewriteRule ^Add-Store addStore.php [NE,L]
 
-RewriteRule ^Add-Course addCourse.php [NC,L]
+RewriteRule ^Store store.php [NE,L]
 
-RewriteRule ^Course course.php [NC,L]
+RewriteRule ^Add-Product addProduct.php [NE,L]
 
-RewriteRule ^Add-Promo-Code addPromoCode.php [NC,L]
 
-RewriteRule ^Promo-Code promoCode.php [NC,L]
+RewriteRule ^Product product.php [NE,L]
 
-RewriteRule ^Product-Analysis productAnalysis.php [NC,L]
+RewriteRule ^Add-Course addCourse.php [NE,L]
 
-RewriteRule ^Business-Analysis businessAnalysis.php [NC,L]
+RewriteRule ^Course course.php [NE,L]
 
-RewriteRule ^Store-Analysis storeAnalysis.php [NC,L]
+RewriteRule ^Add-Promo-Code addPromoCode.php [NE,L]
 
-RewriteRule ^Pending-Order pendingOrder.php [NC,L]
+RewriteRule ^Promo-Code promoCode.php [NE,L]
 
-RewriteRule ^Confirm-Order confirmOrder.php [NC,L]
+RewriteRule ^Pending-Order pendingOrder.php [NE,L]
 
-RewriteRule ^Report report.php [NC,L]
+RewriteRule ^Confirm-Order confirmOrder.php [NE,L]
 
-RewriteRule ^Customer customer.php [NC,L]
+RewriteRule ^Report report.php [NE,L]
 
-RewriteRule ^Add-Admin addAdmin.php [NC,L]
+RewriteRule ^Customer customer.php [NE,L]
 
-RewriteRule ^Admin admin.php [NC,L]
+RewriteRule ^Add-Admin addAdmin.php [NE,L]
 
-RewriteRule ^Profile profile.php [NC,L]
+RewriteRule ^Admin admin.php [NE,L]
 
-RewriteRule ^Insert insert.php [NC,L]
+RewriteRule ^Profile profile.php [NE,L]
 
-RewriteRule ^Update update.php [NC,L]
+RewriteRule ^Insert insert.php [NE,L]
 
-RewriteRule ^Delete delete.php [NC,L]
+RewriteRule ^Update update.php [NE,L]
+
+RewriteRule ^Delete delete.php [NE,L]
 

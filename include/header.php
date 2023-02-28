@@ -30,7 +30,12 @@
             <div class="collapse navbar-collapse justify-content-between">
                 <div class="header-left">
                     <div class="dashboard_bar">
-                        Dashboard
+                        <?php
+                        $url=$_SERVER["REQUEST_URI"];
+                        $str = substr($url, strrpos($url, '/') + 1);
+                        $string = str_replace("-", " ", $str);
+                        echo $string;
+                        ?>
                         <span>Welcome to Admin!</span>
                     </div>
                 </div>

@@ -45,37 +45,7 @@ if (!isset($_SESSION['userid'])) {
         <div class="content-body">
             <!-- row -->
 			<div class="container-fluid">
-				<!-- Add Order -->
-				<div class="modal fade" id="addOrderModalside">
-					<div class="modal-dialog" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title">Add Menus</h5>
-								<button type="button" class="close" data-dismiss="modal"><span>&times;</span>
-								</button>
-							</div>
-							<div class="modal-body">
-								<form>
-									<div class="form-group">
-										<label class="text-black font-w500">Food Name</label>
-										<input type="text" class="form-control">
-									</div>
-									<div class="form-group">
-										<label class="text-black font-w500">Order Date</label>
-										<input type="date" class="form-control">
-									</div>
-									<div class="form-group">
-										<label class="text-black font-w500">Food Price</label>
-										<input type="text" class="form-control">
-									</div>
-									<div class="form-group">
-										<button type="button" class="btn btn-primary">Submit</button>
-									</div>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
+
 				<div class="row">
 					<div class="col-xl-3 col-xxl-6 col-sm-6">
 						<div class="card grd-card">
@@ -174,6 +144,7 @@ if (!isset($_SESSION['userid'])) {
 						</div>
 					</div>
 				</div>
+
             </div>
         </div>
         <!--**********************************
