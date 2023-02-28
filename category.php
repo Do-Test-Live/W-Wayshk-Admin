@@ -3,7 +3,7 @@ session_start();
 require_once("include/dbController.php");
 $db_handle = new DBController();
 if (!isset($_SESSION['userid'])) {
-    header("Location: index.php");
+    header("Location: Login");
 }?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,6 +12,8 @@ if (!isset($_SESSION['userid'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Category | Wayshk Admin</title>
+    <!-- Datatable -->
+    <link href="vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
     <?php include 'include/css.php'; ?>
 </head>
 <body>
@@ -45,8 +47,47 @@ if (!isset($_SESSION['userid'])) {
     <div class="content-body">
         <!-- row -->
         <div class="container-fluid">
-            <!-- Add Order -->
-
+            <!-- Category List -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Category List</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="example3" class="display min-w850">
+                                    <thead>
+                                    <tr>
+                                        <th>SL</th>
+                                        <th>Name</th>
+                                        <th>Image</th>
+                                        <th>Insert Date</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Tiger Nixon</td>
+                                        <td>Image</td>
+                                        <td>2011/04/25</td>
+                                        <td>Active</td>
+                                        <td>
+                                            <div class="d-flex">
+                                                <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
+                                                <a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <!--**********************************
@@ -61,5 +102,8 @@ if (!isset($_SESSION['userid'])) {
 ***********************************-->
 
 <?php include 'include/js.php'; ?>
+<!-- Datatable -->
+<script src="vendor/datatables/js/jquery.dataTables.min.js"></script>
+<script src="js/plugins-init/datatables.init.js"></script>
 </body>
 </html>

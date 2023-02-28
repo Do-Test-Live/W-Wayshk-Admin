@@ -3,7 +3,7 @@ session_start();
 require_once("include/dbController.php");
 $db_handle = new DBController();
 if (isset($_SESSION['userid'])) {
-    header("Location: dashboard.php");
+    header("Location: Dashboard");
 }?>
 <!DOCTYPE html>
 <html lang="en" class="h-100">

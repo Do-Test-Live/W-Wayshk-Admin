@@ -3,7 +3,7 @@ session_start();
 require_once("include/dbController.php");
 $db_handle = new DBController();
 if (!isset($_SESSION['userid'])) {
-    header("Location: index.php");
+    header("Location: Login");
 }?>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,8 +45,55 @@ if (!isset($_SESSION['userid'])) {
     <div class="content-body">
         <!-- row -->
         <div class="container-fluid">
-            <!-- Add Order -->
-
+            <!-- Add Product -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Add Product</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="basic-form">
+                                <form>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <label>Category</label>
+                                            <input type="text" class="form-control" placeholder="">
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <label>Store</label>
+                                            <input type="text" class="form-control" placeholder="">
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <label>Product Number</label>
+                                            <input type="text" class="form-control" placeholder="">
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <label>Product Image</label>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Upload</span>
+                                                </div>
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" multiple>
+                                                    <label class="custom-file-label">Choose file</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <label>Description</label>
+                                            <textarea class="form-control" rows="4" id="comment"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-primary w-50">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <!--**********************************
