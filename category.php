@@ -4,7 +4,7 @@ require_once("include/dbController.php");
 $db_handle = new DBController();
 if (!isset($_SESSION['userid'])) {
     header("Location: Login");
-}?>
+} ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,44 +49,142 @@ if (!isset($_SESSION['userid'])) {
         <div class="container-fluid">
             <!-- Category List -->
             <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">Category List</h4>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table id="example3" class="display min-w850">
-                                    <thead>
-                                    <tr>
-                                        <th>SL</th>
-                                        <th>Name</th>
-                                        <th>Image</th>
-                                        <th>Insert Date</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Tiger Nixon</td>
-                                        <td>Image</td>
-                                        <td>2011/04/25</td>
-                                        <td>Active</td>
-                                        <td>
-                                            <div class="d-flex">
-                                                <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
-                                                <a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+                <?php if (isset($_GET['catId'])) { ?>
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Update Category</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="basic-form">
+                                    <form method="post" action="Update" enctype="multipart/form-data">
+
+                                        <?php $data = $db_handle->runQuery("SELECT * FROM category where id={$_GET['catId']}"); ?>
+
+                                        <input type="hidden" value="<?php echo $data[0]["id"]; ?>" name="id" required>
+
+                                        <div class="mb-3 row">
+                                            <label class="col-sm-3 col-form-label">Category Name</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" name="c_name"
+                                                       placeholder="Category Name"
+                                                       value="<?php echo $data[0]["c_name"]; ?>" required>
                                             </div>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label class="col-sm-3 col-form-label">Image</label>
+                                            <div class="col-sm-6">
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">Upload</span>
+                                                    </div>
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input" name="cat_image" accept="image/png, image/jpeg, image/jpg">
+                                                        <label class="custom-file-label">Choose file (png, jpg, jpeg)</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <img src="<?php echo $data[0]["image"]; ?>" class="img-fluid"
+                                                     alt=""/>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label class="col-sm-3 col-form-label">Status</label>
+                                            <div class="col-sm-9">
+                                                <select class="default-select  form-control wide" name="status"
+                                                        required>
+                                                    <option value="1" <?php echo ($data[0]["status"] == 1) ? "selected" : ""; ?>>
+                                                        Show
+                                                    </option>
+                                                    <option value="0" <?php echo ($data[0]["status"] == 0) ? "selected" : ""; ?>>
+                                                        Hide
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <div class="col-sm-6 mx-auto">
+                                                <button type="submit" class="btn btn-primary w-25"
+                                                        name="updateCategory">Submit
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                <?php } else { ?>
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Category List</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table id="example3" class="display min-w850">
+                                        <thead>
+                                        <tr>
+                                            <th>SL</th>
+                                            <th>Category Name</th>
+                                            <th>Category Image</th>
+                                            <th>Insert Date</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php
+                                        $category_data = $db_handle->runQuery("SELECT * FROM category order by id desc");
+                                        $row_count = $db_handle->numRows("SELECT * FROM category order by id desc");
+
+                                        for ($i = 0; $i < $row_count; $i++) {
+                                            ?>
+                                            <tr>
+                                                <td><?php echo $i + 1; ?></td>
+                                                <td><?php echo $category_data[$i]["c_name"]; ?></td>
+                                                <td><a href="<?php echo $category_data[$i]["image"]; ?>"
+                                                       target="_blank">Image</a></td>
+                                                <?php
+                                                $date = date_create($category_data[$i]["inserted_at"]);
+                                                $date_formatted = date_format($date, "d F y, g:i A");
+                                                ?>
+                                                <td><?php echo $date_formatted; ?></td>
+                                                <?php
+                                                if ($category_data[$i]["status"] == 1) {
+                                                    ?>
+                                                    <td>Active</td>
+                                                    <?php
+                                                } else {
+                                                    ?>
+                                                    <td>Deactive</td>
+                                                    <?php
+                                                }
+                                                ?>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <a href="Category?catId=<?php echo $category_data[$i]["id"]; ?>"
+                                                           class="btn btn-primary shadow btn-xs sharp mr-1"><i
+                                                                    class="fa fa-pencil"></i></a>
+                                                        <a onclick="categoryDelete(<?php echo $category_data[$i]["id"]; ?>);"
+                                                           class="btn btn-danger shadow btn-xs sharp"><i
+                                                                    class="fa fa-trash"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <?php
+                                        }
+                                        ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php
+                }
+                ?>
             </div>
         </div>
     </div>
@@ -102,6 +200,56 @@ if (!isset($_SESSION['userid'])) {
 ***********************************-->
 
 <?php include 'include/js.php'; ?>
+<script>
+    function categoryDelete(id) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: 'get',
+                    url: 'Delete',
+                    data: {
+                        catId: id
+                    },
+                    success: function (data) {
+                        if (data.toString() === 'P') {
+                            Swal.fire(
+                                'Not Deleted!',
+                                'Your have store in this category.',
+                                'error'
+                            ).then((result) => {
+                                window.location = 'Category';
+                            });
+                        } else {
+                            Swal.fire(
+                                'Deleted!',
+                                'Your file has been deleted.',
+                                'success'
+                            ).then((result) => {
+                                window.location = 'Category';
+                            });
+                        }
+                    }
+                });
+            } else {
+                Swal.fire(
+                    'Cancelled!',
+                    'Your Category is safe :)',
+                    'error'
+                ).then((result) => {
+                    window.location = 'Category';
+                });
+            }
+        })
+    }
+</script>
 <!-- Datatable -->
 <script src="vendor/datatables/js/jquery.dataTables.min.js"></script>
 <script src="js/plugins-init/datatables.init.js"></script>

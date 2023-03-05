@@ -54,11 +54,11 @@ if (!isset($_SESSION['userid'])) {
                         </div>
                         <div class="card-body">
                             <div class="basic-form">
-                                <form>
+                                <form action="Insert" method="post" enctype="multipart/form-data">
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
                                             <label>Category Name</label>
-                                            <input type="text" class="form-control" placeholder="">
+                                            <input type="text" class="form-control" placeholder="" name="cat_name" required>
                                         </div>
                                         <div class="form-group col-md-12">
                                             <label>Category Image</label>
@@ -67,14 +67,14 @@ if (!isset($_SESSION['userid'])) {
                                                     <span class="input-group-text">Upload</span>
                                                 </div>
                                                 <div class="custom-file">
-                                                    <input type="file" class="custom-file-input" multiple>
-                                                    <label class="custom-file-label">Choose file</label>
+                                                    <input type="file" class="custom-file-input" name="cat_image" accept="image/png, image/jpeg, image/jpg" required>
+                                                    <label class="custom-file-label">Choose file (png, jpg, jpeg)</label>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="text-center">
-                                        <button type="submit" class="btn btn-primary w-50">Submit</button>
+                                        <button type="submit" class="btn btn-primary w-50" name="add_cat">Submit</button>
                                     </div>
                                 </form>
                             </div>
