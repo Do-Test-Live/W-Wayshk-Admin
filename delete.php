@@ -10,7 +10,7 @@ if (!isset($_SESSION["userid"])) {
 }
 
 if (isset($_GET['catId'])) {
-    $row = $db_handle->numRows("select * FROM `store` WHERE category_id='{$_GET['catId']}'");
+    $row = $db_handle->numRows("select * FROM `product` WHERE category_id='{$_GET['catId']}'");
 
     if ($row == 0) {
         $data = $db_handle->runQuery("select * FROM `category` WHERE id='{$_GET['catId']}'");
@@ -20,5 +20,10 @@ if (isset($_GET['catId'])) {
     } else {
         echo 'P';
     }
+}
+
+if(isset($_GET['productId'])){
+    $db_handle->insertQuery("delete from product where id=" . $_GET['productId'] . "");
+    echo 'success';
 }
 

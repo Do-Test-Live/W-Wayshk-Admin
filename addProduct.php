@@ -4,7 +4,7 @@ require_once("include/dbController.php");
 $db_handle = new DBController();
 if (!isset($_SESSION['userid'])) {
     header("Location: Login");
-}?>
+} ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,39 +54,60 @@ if (!isset($_SESSION['userid'])) {
                         </div>
                         <div class="card-body">
                             <div class="basic-form">
-                                <form>
+                                <form action="Insert" method="post" enctype="multipart/form-data">
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
-                                            <label>Category</label>
-                                            <input type="text" class="form-control" placeholder="">
+                                            <label>Product Name *</label>
+                                            <input type="text" class="form-control" name="product_name" placeholder="" required>
                                         </div>
                                         <div class="form-group col-md-12">
-                                            <label>Store</label>
-                                            <input type="text" class="form-control" placeholder="">
+                                            <label>Product Code</label>
+                                            <input type="text" class="form-control" name="product_code" placeholder="">
                                         </div>
                                         <div class="form-group col-md-12">
-                                            <label>Product Number</label>
-                                            <input type="text" class="form-control" placeholder="">
+                                            <label>Select Product Category *</label>
+                                            <select class="form-control default-select" id="sel1" name="product_category" required>
+                                                <?php
+                                                $cat = $db_handle->runQuery("SELECT * FROM `category`");
+                                                $row_count = $db_handle->numRows("SELECT * FROM `category`");
+                                                for ($i = 0; $i < $row_count; $i++) {
+                                                    ?>
+                                                    <option value="<?php echo $cat[$i]["id"]; ?>"><?php echo $cat[$i]["c_name"]; ?></option>
+                                                    <?php
+                                                }
+                                                ?>
+                                            </select>
                                         </div>
                                         <div class="form-group col-md-12">
-                                            <label>Product Image</label>
+                                            <label>Product Selling Price *</label>
+                                            <input type="number" class="form-control" placeholder="" name="selling_price" required>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <label>Product Image *</label>
                                             <div class="input-group mb-3">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">Upload</span>
                                                 </div>
                                                 <div class="custom-file">
-                                                    <input type="file" class="custom-file-input" multiple>
+                                                    <input type="file" class="custom-file-input" name="product_image[]" multiple required>
                                                     <label class="custom-file-label">Choose file</label>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-group col-md-12">
-                                            <label>Description</label>
-                                            <textarea class="form-control" rows="4" id="comment"></textarea>
+                                            <label>Product Status *</label>
+                                            <select class="form-control default-select" id="sel1" name="product_status" required>
+                                                <option value="1" selected>Active</option>
+                                                <option value="0">Deactivate</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <label>Product Description *</label>
+                                            <textarea class="form-control" rows="4" id="comment" name="product_description" required></textarea>
                                         </div>
                                     </div>
                                     <div class="text-center">
-                                        <button type="submit" class="btn btn-primary w-50">Submit</button>
+                                        <button type="submit" name="add_product" class="btn btn-primary w-50">Submit</button>
                                     </div>
                                 </form>
                             </div>
@@ -108,5 +129,6 @@ if (!isset($_SESSION['userid'])) {
 ***********************************-->
 
 <?php include 'include/js.php'; ?>
+
 </body>
 </html>
