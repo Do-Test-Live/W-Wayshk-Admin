@@ -27,3 +27,11 @@ if(isset($_GET['productId'])){
     echo 'success';
 }
 
+
+if(isset($_GET['courseId'])){
+    $data = $db_handle->runQuery("select * FROM `course` WHERE course_id='{$_GET['courseId']}'");
+    unlink($data[0]['course_image']);
+    $db_handle->insertQuery("delete from course where course_id=" . $_GET['courseId'] . "");
+    echo 'success';
+}
+

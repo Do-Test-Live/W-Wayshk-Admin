@@ -77,3 +77,38 @@ if (isset($_POST["add_product"])) {
                 window.location.href='Add-Product';
                 </script>";
 }
+
+if(isset($_POST['add_course'])){
+    $course_name = $db_handle->checkValue($_POST['course_name']);
+    $course_duration = $db_handle->checkValue($_POST['course_duration']);
+    $course_price = $db_handle->checkValue($_POST['course_price']);
+    $course_description = $db_handle->checkValue($_POST['course_description']);
+    $inserted_at = date("Y-m-d H:i:s");
+
+    $image = '';
+    if (!empty($_FILES['course_image']['name'])) {
+        $RandomAccountNumber = mt_rand(1, 99999);
+        $file_name = $RandomAccountNumber . "_" . $_FILES['course_image']['name'];
+        $file_size = $_FILES['course_image']['size'];
+        $file_tmp  = $_FILES['course_image']['tmp_name'];
+
+        $file_type = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
+        if ($file_type != "jpg" && $file_type != "png" && $file_type != "jpeg") {
+            echo "<script>
+                document.cookie = 'alert = 5;';
+                window.location.href='Add-Category';
+                </script>";
+
+        } else {
+            move_uploaded_file($file_tmp, "assets/course/" . $file_name);
+            $image = "assets/course/" . $file_name;
+        }
+    }
+
+    $insert = $db_handle->insertQuery("INSERT INTO `course`(`course_name`, `course_duration`, `course_description`,`course_image`, `inserted_at`,`course_price`) VALUES ('$course_name','$course_description','$course_description','$image','$inserted_at','$course_price')");
+
+    echo "<script>
+                document.cookie = 'alert = 3;';
+                window.location.href='Add-Course';
+                </script>";
+}

@@ -45,8 +45,55 @@ if (!isset($_SESSION['userid'])) {
     <div class="content-body">
         <!-- row -->
         <div class="container-fluid">
-            <!-- Add Order -->
-
+            <!-- Add Course -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Add Course</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="basic-form">
+                                <form action="Insert" method="post" enctype="multipart/form-data">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <label>Course Name</label>
+                                            <input type="text" class="form-control" placeholder="" name="course_name" required>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <label>Course Duration</label>
+                                            <input type="text" class="form-control" placeholder="" name="course_duration" required>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <label>Course Price</label>
+                                            <input type="number" class="form-control" placeholder="" name="course_price" required>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <label>Course Image</label>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Upload</span>
+                                                </div>
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" name="course_image" accept="image/png, image/jpeg, image/jpg" required="">
+                                                    <label class="custom-file-label">Choose file (png, jpg, jpeg)</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <label>Course Description *</label>
+                                            <textarea class="form-control" rows="4" id="comment" name="course_description" required></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-primary w-50" name="add_course">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <!--**********************************
