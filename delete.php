@@ -35,3 +35,8 @@ if(isset($_GET['courseId'])){
     echo 'success';
 }
 
+if(isset($_GET['promoCodeId'])){
+    $db_handle->insertQuery("delete from promo_code where id=" . $_GET['promoCodeId'] . "");
+    echo 'success';
+}
+

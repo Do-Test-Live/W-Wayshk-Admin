@@ -54,15 +54,19 @@ if (!isset($_SESSION['userid'])) {
                         </div>
                         <div class="card-body">
                             <div class="basic-form">
-                                <form>
+                                <form action="Insert" method="post" enctype="multipart/form-data">
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
                                             <label>Name</label>
-                                            <input type="text" class="form-control" placeholder="">
+                                            <input type="text" class="form-control" placeholder="" name="admin_name">
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <label>Role</label>
+                                            <input type="text" class="form-control" placeholder="" name="admin_role">
                                         </div>
                                         <div class="form-group col-md-12">
                                             <label>Email</label>
-                                            <input type="email" class="form-control" placeholder="Email">
+                                            <input type="email" class="form-control" placeholder="Email" name="admin_email">
                                         </div>
                                         <div class="form-group col-md-12">
                                             <label>Profile Image</label>
@@ -71,22 +75,18 @@ if (!isset($_SESSION['userid'])) {
                                                     <span class="input-group-text">Upload</span>
                                                 </div>
                                                 <div class="custom-file">
-                                                    <input type="file" class="custom-file-input" multiple>
+                                                    <input type="file" class="custom-file-input" multiple name="admin_image">
                                                     <label class="custom-file-label">Choose file</label>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-group col-md-12">
                                             <label>Password</label>
-                                            <input type="password" class="form-control" placeholder="Password">
-                                        </div>
-                                        <div class="form-group col-md-12">
-                                            <label>Confirm Password</label>
-                                            <input type="password" class="form-control" placeholder="Password">
+                                            <input type="password" class="form-control" placeholder="Password" name="password">
                                         </div>
                                     </div>
                                     <div class="text-center">
-                                        <button type="submit" class="btn btn-primary w-50">Submit</button>
+                                        <button type="submit" class="btn btn-primary w-50" name="admin_insert">Submit</button>
                                     </div>
                                 </form>
                             </div>

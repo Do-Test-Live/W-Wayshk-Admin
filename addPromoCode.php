@@ -4,7 +4,7 @@ require_once("include/dbController.php");
 $db_handle = new DBController();
 if (!isset($_SESSION['userid'])) {
     header("Location: Login");
-}?>
+} ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,7 +46,64 @@ if (!isset($_SESSION['userid'])) {
         <!-- row -->
         <div class="container-fluid">
             <!-- Add Order -->
-
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Add PromoCode</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="basic-form">
+                                <form action="Insert" method="post" enctype="multipart/form-data">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <label>Coupon Name</label>
+                                            <input type="text" class="form-control" placeholder="" name="coupon_name"
+                                                   required>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <label>Coupon Code</label>
+                                            <input type="text" class="form-control" placeholder="" name="coupon_code"
+                                                   required>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <label>Select Promo Type *</label>
+                                            <select class="form-control default-select" id="sel1"
+                                                    name="promo_type" required>
+                                                <option value="0">Amount</option>
+                                                <option value="1">Persentage</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <label>Coupon Amount</label>
+                                            <input type="text" class="form-control" placeholder="" name="coupon_amount"
+                                                   required>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <label>Start Date</label>
+                                            <input type="date" class="form-control" placeholder="" name="start_date"
+                                                   required>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <label>Expirey Date</label>
+                                            <input type="date" class="form-control" placeholder="" name="expirey_date"
+                                                   required>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <label>Coupon Description *</label>
+                                            <textarea class="form-control" rows="4" id="comment" name="coupon_description" required></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-primary w-50" name="add_promo_code">Submit
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <!--**********************************

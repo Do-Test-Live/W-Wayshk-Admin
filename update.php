@@ -98,3 +98,24 @@ if (isset($_POST['updateCourse'])) {
                 window.location.href='Course';
                 </script>";
 }
+
+
+if (isset($_POST['update_promo_code'])) {
+    $promo_id = $db_handle->checkValue($_POST['id']);
+    $updated_at = date("Y-m-d H:i:s");
+    $coupon_name = $db_handle->checkValue($_POST['coupon_name']);
+    $coupon_code = $db_handle->checkValue($_POST['coupon_code']);
+    $coupon_type = $db_handle->checkValue($_POST['coupon_type']);
+    $coupon_amount = $db_handle->checkValue($_POST['coupon_amount']);
+    $start_date = $db_handle->checkValue($_POST['start_date']);
+    $expirey_date = $db_handle->checkValue($_POST['expirey_date']);
+    $description = $db_handle->checkValue($_POST['description']);
+    $status = $db_handle->checkValue($_POST['status']);
+
+    $data = $db_handle->insertQuery("UPDATE `promo_code` SET `coupon_name`='$coupon_name',`description`='$description',`code`='$coupon_code',`coupon_type`='$coupon_type',`amount`='$coupon_amount',
+                        `start_date`='$start_date',`expirey_date`='$expirey_date',`status`='$status',`updated_at`='$updated_at' WHERE id={$promo_id}");
+    echo "<script>
+                document.cookie = 'alert = 3;';
+                window.location.href='Promo-Code';
+                </script>";
+}

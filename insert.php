@@ -112,3 +112,59 @@ if(isset($_POST['add_course'])){
                 window.location.href='Add-Course';
                 </script>";
 }
+
+if(isset($_POST['add_promo_code'])){
+    $coupon_name = $db_handle->checkValue($_POST['coupon_name']);
+    $coupon_code = $db_handle->checkValue($_POST['coupon_code']);
+    $promo_type = $db_handle->checkValue($_POST['promo_type']);
+    $coupon_amount = $db_handle->checkValue($_POST['coupon_amount']);
+    $start_date = $db_handle->checkValue($_POST['start_date']);
+    $expirey_date = $db_handle->checkValue($_POST['expirey_date']);
+    $coupon_description = $db_handle->checkValue($_POST['coupon_description']);
+    $inserted_at = date("Y-m-d H:i:s");
+
+    $insert = $db_handle->insertQuery("INSERT INTO `promo_code`(`coupon_name`, `description`, `code`, `coupon_type`, `amount`, `start_date`, `expirey_date`, `inserted_at`) 
+VALUES ('$coupon_name','$coupon_description','$coupon_code','$promo_type','$coupon_amount','$start_date','$expirey_date','$inserted_at')");
+
+    echo "<script>
+                document.cookie = 'alert = 3;';
+                window.location.href='Add-Promo-Code';
+                </script>";
+
+}
+
+if (isset($_POST["admin_insert"])) {
+    $admin_name = $db_handle->checkValue($_POST['admin_name']);
+    $admin_role = $db_handle->checkValue($_POST['admin_role']);
+    $admin_email = $db_handle->checkValue($_POST['admin_email']);
+    $password = $db_handle->checkValue($_POST['password']);
+    $image = '';
+    if (!empty($_FILES['admin_image']['name'])) {
+        $RandomAccountNumber = mt_rand(1, 99999);
+        $file_name = $RandomAccountNumber . "_" . $_FILES['admin_image']['name'];
+        $file_size = $_FILES['admin_image']['size'];
+        $file_tmp  = $_FILES['admin_image']['tmp_name'];
+
+        $file_type = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
+        if ($file_type != "jpg" && $file_type != "png" && $file_type != "jpeg") {
+            $attach_files = '';
+            echo "<script>
+                document.cookie = 'alert = 5;';
+                window.location.href='Add-Category';
+                </script>";
+
+        } else {
+            move_uploaded_file($file_tmp, "assets/admin/" . $file_name);
+            $image = "assets/admin/" . $file_name;
+        }
+    }
+
+    $inserted_at = date("Y-m-d H:i:s");
+
+    $insert = $db_handle->insertQuery("INSERT INTO `admin_login`(`name`, `image`, `email`, `password`, `role`) VALUES ('$admin_name','$image','$admin_email','$password',' $admin_role')");
+
+    echo "<script>
+                document.cookie = 'alert = 3;';
+                window.location.href='Add-Admin';
+                </script>";
+}

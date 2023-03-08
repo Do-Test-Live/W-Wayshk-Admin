@@ -264,7 +264,7 @@ if (!isset($_SESSION['userid'])) {
                     'Your Category is safe :)',
                     'error'
                 ).then((result) => {
-                    window.location = 'Category';
+                    window.location = 'Course';
                 });
             }
         })
