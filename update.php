@@ -119,3 +119,39 @@ if (isset($_POST['update_promo_code'])) {
                 window.location.href='Promo-Code';
                 </script>";
 }
+
+if (isset($_POST['updateAdmin'])) {
+    $id = $db_handle->checkValue($_POST['id']);
+    $name = $db_handle->checkValue($_POST['name']);
+    $email = $db_handle->checkValue($_POST['email']);
+    $role = $db_handle->checkValue($_POST['role']);
+    $password = $db_handle->checkValue($_POST['password']);
+    $status = $db_handle->checkValue($_POST['status']);
+    $image = '';
+    $query = '';
+    if (!empty($_FILES['image']['name'])) {
+        $RandomAccountNumber = mt_rand(1, 99999);
+        $file_name = $RandomAccountNumber . "_" . $_FILES['image']['name'];
+        $file_size = $_FILES['image']['size'];
+        $file_tmp = $_FILES['image']['tmp_name'];
+
+        $file_type = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
+        if ($file_type != "jpg" && $file_type != "png" && $file_type != "jpeg" && $file_type != "gif") {
+            $image = '';
+        } else {
+            $data = $db_handle->runQuery("select * FROM `admin_login` WHERE id='{$id}'");
+            unlink($data[0]['image']);
+            move_uploaded_file($file_tmp, "assets/admin/" . $file_name);
+            $image = "assets/admin/" . $file_name;
+            $query .= ",`image`='" . $image . "'";
+        }
+    }
+
+    $data = $db_handle->insertQuery("UPDATE `admin_login` SET `name`='$name',`email`='$email',`password`='$password',`role`='$role',`status`='$status'". $query ." WHERE id={$id}");
+    echo "<script>
+                document.cookie = 'alert = 3;';
+                window.location.href='Admin';
+                </script>";
+
+
+}

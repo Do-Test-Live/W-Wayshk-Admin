@@ -40,3 +40,10 @@ if(isset($_GET['promoCodeId'])){
     echo 'success';
 }
 
+if(isset($_GET['adminId'])){
+    $data = $db_handle->runQuery("select * FROM `admin_login` WHERE id ='{$_GET['adminId']}'");
+    unlink($data[0]['image']);
+    $db_handle->insertQuery("delete from admin_login where id=" . $_GET['adminId'] . "");
+    echo 'success';
+}
+
